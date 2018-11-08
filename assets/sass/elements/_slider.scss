@@ -1,0 +1,239 @@
+.gallery {
+	position: relative;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	-moz-flex-direction: row;
+	-ms-flex-direction: row;
+	-o-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: nowrap;
+	-moz-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	-o-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	max-width: 100%;
+	max-height: 520px;
+	margin: 35px 50px;
+}
+
+.gallery > .gallery-aside {
+	width: 168px;
+	overflow-y: auto;
+}
+
+.gallery > .gallery-aside > .gallery-aside-filters {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	-moz-flex-direction: row;
+	-ms-flex-direction: row;
+	-o-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	> select { 
+		flex: 1;
+		margin: 0 10px;
+		max-width: none;
+		padding: 4px;
+		border-radius: 0px;
+		outline: none;
+	}
+}
+
+.gallery > .gallery-aside > .gallery-aside-items {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;	
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+	justify-content: center;			
+	margin-top: 25px;
+}
+
+.gallery > .gallery-aside > .gallery-aside-items > .gallery-aside-item {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.gallery > .gallery-aside > .gallery-aside-items > .gallery-aside-item img {
+	width: 128px;
+	filter: grayscale(100%);
+	cursor: pointer;
+}
+
+.gallery > .gallery-content {
+	flex: 1;
+	text-align: center;
+	padding: 25px 0;
+}
+
+.gallery > .gallery-content img {
+	max-height: 520px;
+}
+
+.gallery > .gallery-content p {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	line-height: 150%;
+	text-align: left;
+	font-size: 18px;
+	max-width: 240px;
+	font-family: Arial, sans-serif;
+}
+
+.gallery {
+	display: none;
+}
+
+.gallery.gallery-loading,
+.gallery.gallery-ready {
+	display: flex;
+}
+
+.gallery.gallery-loading::before,
+.gallery.gallery-loading::after {
+	content: "";
+	position: absolute;
+	display: block;
+	z-index: 999;
+}
+
+.gallery.gallery-loading::before {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	border-radius: 0;
+	background-color: rgba(200,200,200,0.5);
+}
+
+.gallery.gallery-loading::after {
+	width: 50px;
+	height: 50px;
+	border: 5px solid red;
+	border-color: red red transparent red;
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	animation: rotateLoadingSpinner 1s linear infinite;
+}
+
+
+img {
+	max-width: 100%;
+}
+
+.gallery-arrow-container {
+	position: absolute;
+	bottom: 0px; 
+	left: 192px;
+
+	button {
+		margin: 0 4px;
+	}
+
+	.gallery-arrow {
+		position: relative;
+		width: 25px;
+		height: 25px;
+		border: 0;
+		background-color: transparent;
+		cursor: pointer;
+		outline: none;
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			border: 10px solid #ccc;
+		}
+
+		&.gallery-arrow-left {
+			&::after {
+				border-color: transparent #333 transparent transparent;
+			}
+		}
+
+		&.gallery-arrow-right {
+			&::after {
+				border-color: transparent transparent transparent #333;
+			}
+		}
+	}
+}
+
+@keyframes rotateLoadingSpinner {
+	from {
+		transform: translateY(-50%) translateX(-50%) rotate(0deg);
+	}			
+	to {
+		transform: translateY(-50%) translateX(-50%) rotate(360deg);
+	}			
+}
+
+@media screen and (max-width: 480px) {
+	.gallery {
+		padding-bottom: 50px;
+		margin: 5px 10px 15px 10px;
+		> .gallery-aside {
+			display: none;
+		}
+
+		> .gallery-content {
+			img {
+				width: auto;
+				height: 100%;
+				max-width: 100%;
+			}
+
+			p {
+				position: absolute;
+				bottom: 0;
+				right: 10px;
+				width: 220px;
+				font-size: 14px;
+				text-align: right;
+				span {
+					&:first-child {
+						&::after {
+							content: " ";
+						}
+					}
+				}
+				br {
+					display: none;
+				}
+			}
+		}
+
+		.gallery-arrow-container {
+			left: 10px;
+			bottom: 0;
+			width: 80px;
+		}
+	}
+}

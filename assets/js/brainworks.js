@@ -35,6 +35,9 @@
         wrapHighlightedElements('.highlighted');
         // Buy one click
         buyOneClick('.one-click', '[data-field-id="field7"]', 'h1.page-name');
+        const galleryElement = document.querySelector("#gallery");
+        if (galleryElement)
+            (new Gallery(galleryElement));
 
     });
 

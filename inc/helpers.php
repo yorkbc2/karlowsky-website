@@ -488,3 +488,14 @@ if (!function_exists('sanitize_background_setting')) {
         return $value;
     }
 }
+
+if (!function_exists('get_custom_post_type_categories')) {
+    function get_custom_post_type_categories ($custom_post="") {
+        $terms = get_terms('artwork_categories', ['hide_empty' => 0]);
+        $array = [];
+        foreach ($terms as $i => $term) {
+            $array[] = new BW_Custom_Post_Category($term);
+        }
+        return $array;
+    }
+}

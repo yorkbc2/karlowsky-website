@@ -6,6 +6,8 @@
 show_admin_bar(false);
 
 require_once locate_template('/inc/helpers.php');
+require_once locate_template('/inc/interfaces.php');
+require_once locate_template('/inc/classes.php');
 require_once locate_template('/inc/auth.php');
 require_once locate_template('/inc/admin.php');
 require_once locate_template('/inc/login.php');
@@ -23,3 +25,4 @@ require_once locate_template('/inc/split-post-pagination.php');
 require_once locate_template('/inc/feedback.php');
 require_once locate_template('/inc/shortcodes.php');
 require_once locate_template('/inc/meta-boxes.php');
+require_once locate_template('/inc/custom-post-artwork.php');

@@ -49,6 +49,7 @@ Tags: one-column, two-columns, full-width-template, e-commerce
 //@import "elements/other";
 @import "elements/icons";
 @import "elements/custom-scrollbar";
+@import "elements/slider";
 /* BLOCKS */
 @import "blocks/menu";
 @import "blocks/header";
@@ -97,10 +98,6 @@ body {
     position: relative;
     overflow-x: hidden;
     min-height: 100%;
-
-    @media #{$mobile} {
-        padding-top: 80px;
-    }
 }
 
 strong,
@@ -163,4 +160,24 @@ img {
 
 .is-hide {
     display: none;
+}
+
+.centered-logo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 640px;
+    max-width: 100%;
+    opacity: 0;
+    animation: fadeIn 1s 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<style>
+		.gallery {
+			position: relative;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			-webkit-flex-direction: row;
+			-moz-flex-direction: row;
+			-ms-flex-direction: row;
+			-o-flex-direction: row;
+			flex-direction: row;
+			-webkit-flex-wrap: nowrap;
+			-moz-flex-wrap: nowrap;
+			-ms-flex-wrap: nowrap;
+			-o-flex-wrap: nowrap;
+			flex-wrap: nowrap;
+			justify-content: flex-start;
+			max-width: 100%;
+			max-height: 640px;
+			margin: 35px 50px;
+		}
+
+		.gallery > .gallery-aside {
+			width: 168px;
+			overflow-y: auto;
+		}
+
+		.gallery > .gallery-aside > .gallery-aside-items {
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;	
+			-webkit-flex-direction: column;
+			-moz-flex-direction: column;
+			-ms-flex-direction: column;
+			-o-flex-direction: column;
+			flex-direction: column;
+			justify-content: center;			
+			margin-top: 25px;
+		}
+
+		.gallery > .gallery-aside > .gallery-aside-items > .gallery-aside-item {
+			text-align: center;
+		}
+
+		.gallery > .gallery-aside > .gallery-aside-items > .gallery-aside-item img {
+			width: 128px;
+		}
+
+		.gallery > .gallery-content {
+			flex: 1;
+			text-align: center;
+			padding: 25px 0;
+		}
+
+		.gallery > .gallery-content img {
+			max-height: 520px;
+			animation: galleryContentImageAnimation 10s ease-in-out infinite;
+		}
+
+		.gallery > .gallery-content p {
+			text-align: right;
+			font-size: 24px;
+			text-transform: uppercase;
+			font-family: Arial, sans-serif;
+		}
+
+		.gallery {
+			display: none;
+		}
+
+		.gallery.gallery-loading,
+		.gallery.gallery-ready {
+			display: flex;
+		}
+
+		.gallery.gallery-loading::before,
+		.gallery.gallery-loading::after {
+			content: "";
+			position: absolute;
+			display: block;
+			z-index: 999;
+		}
+
+		.gallery.gallery-loading::before {
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			border-radius: 0;
+			background-color: rgba(200,200,200,0.5);
+		}
+
+		.gallery.gallery-loading::after {
+			width: 50px;
+			height: 50px;
+			border: 5px solid red;
+			border-color: red red transparent red;
+			border-radius: 50%;
+			top: 50%;
+			left: 50%;
+			transform: translateY(-50%) translateX(-50%);
+			animation: rotateLoadingSpinner 1s linear infinite;
+		}
+		
+
+		img {
+			max-width: 100%;
+		}
+
+		@keyframes rotateLoadingSpinner {
+			from {
+				transform: translateY(-50%) translateX(-50%) rotate(0deg);
+			}			
+			to {
+				transform: translateY(-50%) translateX(-50%) rotate(360deg);
+			}			
+		}
+
+		@keyframes galleryContentImageAnimation {
+			0% {
+				transform: translateY(10%);
+			}
+			50% {
+				transform: translateY(0);
+			}
+			100% {
+				transform: translateY(10%);
+			}
+		}
+	</style>
+	<div id="gallery" class="gallery">
+		<div class="gallery-items">
+			<div class="gallery-item">
+				<img data-key="image" src="C:\Users\yorke\Desktop\86413906.jpg" alt="">
+				<span data-key="name">Name</span>
+				<span data-key="year">2018</span>
+				<span data-key="place">Berlin</span>
+			</div>
+
+			<div class="gallery-item">
+				<img data-key="image" src="C:\Users\yorke\Desktop\u_7a5b208c866f4f66f84c0437594283ad_800.jpg" alt="">
+				<span data-key="name">Name2</span>
+				<span data-key="year">2017</span>
+				<span data-key="place">New Yorke</span>
+			</div>
+			<div class="gallery-item">
+				<img data-key="image" src="C:\Users\yorke\Desktop\86413906.jpg" alt="">
+				<span data-key="name">Name</span>
+				<span data-key="year">2018</span>
+				<span data-key="place">Berlin</span>
+			</div>
+
+			<div class="gallery-item">
+				<img data-key="image" src="C:\Users\yorke\Desktop\86413906.jpg" alt="">
+				<span data-key="name">Name</span>
+				<span data-key="year">2018</span>
+				<span data-key="place">Berlin</span>
+			</div>
+
+			<div class="gallery-item">
+				<img data-key="image" src="C:\Users\yorke\Desktop\86413906.jpg" alt="">
+				<span data-key="name">Name</span>
+				<span data-key="year">2018</span>
+				<span data-key="place">Berlin</span>
+			</div>
+
+			<div class="gallery-item">
+				<img data-key="image" src="C:\Users\yorke\Desktop\86413906.jpg" alt="">
+				<span data-key="name">Name</span>
+				<span data-key="year">2018</span>
+				<span data-key="place">Berlin</span>
+			</div>
+
+			<div class="gallery-item">
+				<img data-key="image" src="C:\Users\yorke\Desktop\86413906.jpg" alt="">
+				<span data-key="name">Name</span>
+				<span data-key="year">2018</span>
+				<span data-key="place">Berlin</span>
+			</div>
+		</div>
+	</div>
+
+	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
+	<script src="assets/js/gallery.module.js"></script>
+	<script>
+		const gallery = new Gallery(document.querySelector("#gallery"));
+	</script>
+</body>
+</html>

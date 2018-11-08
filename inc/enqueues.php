@@ -14,6 +14,7 @@ function bw_enqueues()
 
     wp_enqueue_script('html5shiv');
     wp_enqueue_script('respond');
+    wp_enqueue_script('gallery', get_template_directory_uri() . "/assets/js/gallery.module.js", array(), null, true);
 
     wp_register_script('modernizr', 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js', array(),
         null, true);
