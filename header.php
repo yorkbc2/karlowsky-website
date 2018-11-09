@@ -12,6 +12,7 @@
           type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
     <?php wp_head(); ?>
+    
 </head>
 <body <?php body_class(); ?> id="top">
 

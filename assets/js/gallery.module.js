@@ -93,12 +93,13 @@ const Gallery = (function () {
 
 			for (var i = 0; i < item.children.length; i++) {
 				const key = item.children[i].getAttribute('data-key');
-				if (key === "image") {
+				if (key === "image" || key === "thumbnail") {
 					dataElement[key] = item.children[i].src;
 					continue;
-				} 
+				}
 				dataElement[key] = item.children[i].innerHTML;
 			}
+			dataElement.thumbnail = dataElement.thumbnail || dataElement.image || "";
 
 			data.push(dataElement);
 		});
@@ -121,6 +122,9 @@ const Gallery = (function () {
 
 		let yearSelect = null;
 		let yearSelectChanger = null;
+
+		let placeSelect = null;
+		let placeSelectChanger = null;
 
 		const changeSelect = function (select) {
 			return function (value) {
@@ -146,6 +150,11 @@ const Gallery = (function () {
 			yearSelectChanger(value).get().onchange(null, value);
 		};
 
+		const changePlaceCallback = function (event, value) {
+			value = value.trim().replace(/\,|\./g, "").toLowerCase();
+			placeSelectChanger(value).get().onchange(null, value);
+		};
+
 		const contentElements = {
 			image: $element("img"),
 			meta: $element("p"),
@@ -162,7 +171,9 @@ const Gallery = (function () {
 				const yearSpan = $element("span", { textContent: meta.year, onclick: function (e) {
 					changeYearCallback(e, meta.year);
 				}});
-				const placeSpan = $element("span", { textContent: ", " + meta.place });
+				const placeSpan = $element("span", { textContent: ", " + meta.place, onclick: function (e) {
+					changePlaceCallback(e, meta.place);
+				}});
 				this.meta.appendMany([
 					nameSpan.get(),
 					$element("br").get(),
@@ -187,7 +198,7 @@ const Gallery = (function () {
 						className: "gallery-aside-item",
 						append: function (c) {
 							return c("img", {
-								src: item.image
+								src: item.thumbnail
 							}).get();
 						},
 						onclick: function () {
@@ -233,12 +244,12 @@ const Gallery = (function () {
 		yearSelect = $element("select", {
 			append: function (c) {
 				const optionsData = getUniqueProperties(data.items, 'year');
-				optionsData.unshift("Any");
+				optionsData.unshift(TRANSLATED_STRINGS.$("Рік"));
 				let options = [];
 				if (optionsData.length > 0) {
-					return optionsData.map(function (option) {
+					return optionsData.map(function (option, index) {
 						return c("option", {
-							value: option.toLowerCase(),
+							value: (index === 0? "any": option.toLowerCase()),
 							textContent: option
 						}).get();
 					});
@@ -268,36 +279,42 @@ const Gallery = (function () {
 
 		asideElements.filters.append(yearSelect.get());
 
-		asideElements.filters.append(
-			$element("select", {
-				append: function (c) {
-					const optionsData = getUniqueProperties(data.items, 'place');
-					optionsData.unshift("Any");
-					let options = [];
-					if (optionsData.length > 0) {
-						return optionsData.map(function (option) {
-							return c("option", {
-								value: option.toLowerCase(),
-								textContent: option
-							}).get();
-						});
-					}
-				},
-				onchange: function (e) {
-					const value = e.target.value;
-					if (value === "any") {
-						delete activeFilters.place;
-					} else {
-						activeFilters.place = value;
-					}
-					data.filteredItems = data.items.filter(function (item) {
-						return arePropsEqual(item, activeFilters);
+		placeSelect = $element("select", {
+			append: function (c) {
+				const optionsData = getUniqueProperties(data.items, 'place');
+				optionsData.unshift(TRANSLATED_STRINGS.$("Вистава"));
+				let options = [];
+				if (optionsData.length > 0) {
+					return optionsData.map(function (option, index) {
+						return c("option", {
+							value: (index === 0? "any": option.toLowerCase()),
+							textContent: option
+						}).get();
 					});
-
-					asideElements.update(data.filteredItems);
 				}
-			}).get()
-		);
+			},
+			onchange: function (e, propsValue) {
+				let value;
+				if (propsValue)
+					value = propsValue.trim().replace(",", "");
+				else 
+					value = e.target.value;
+				if (value === "any") {
+					delete activeFilters.place;
+				} else {
+					activeFilters.place = value;
+				}
+				data.filteredItems = data.items.filter(function (item) {
+					return arePropsEqual(item, activeFilters);
+				});
+
+				asideElements.update(data.filteredItems);
+			}
+		});
+
+		placeSelectChanger = changeSelect(placeSelect);
+
+		asideElements.filters.append(placeSelect.get());
 
 		this.rootElement.appendChild(asideController.get());
 		this.rootElement.appendChild(contentController.get());

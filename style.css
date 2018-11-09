@@ -5812,21 +5812,17 @@ img {
 
 @media screen and (max-width: 480px) {
   .nav {
-    padding-top: 100px;
-    padding-bottom: 0; }
-    .nav .nav-logo {
-      position: absolute;
-      top: 20px;
-      left: 10px; }
-      .nav .nav-logo img {
-        width: 180px;
-        height: auto; }
+    padding-bottom: 0;
+    text-align: center; }
+    .nav .nav-container {
+      flex-direction: column; }
+    .nav .nav-logo img {
+      width: 180px;
+      height: auto; }
     .nav .nav-menu ul.nav-lang-menu {
-      position: absolute;
-      right: 10px;
-      top: 20px;
-      max-width: 140px;
-      text-align: right; }
+      text-align: center;
+      padding-top: 10px;
+      margin-bottom: 10px; }
       .nav .nav-menu ul.nav-lang-menu li {
         margin: 0 3px; }
         .nav .nav-menu ul.nav-lang-menu li a {
@@ -5839,8 +5835,10 @@ img {
       .nav .nav-menu .nav-primary-menu li a,
       .nav .nav-menu .nav-submenu li a {
         font-size: 14px; }
-    .nav .nav-menu .nav-primary-menu li a {
-      font-size: 18px; } }
+    .nav .nav-menu .nav-primary-menu {
+      margin-bottom: 10px; }
+      .nav .nav-menu .nav-primary-menu li a {
+        font-size: 18px; } }
 
 .pre-header {
   padding: 5px 0;

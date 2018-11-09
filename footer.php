@@ -1,5 +1,5 @@
 </div><!-- .page-wrapper end-->
-
+<?php the_localize_script(); ?>
 <footer class="footer">
     <?php if (is_active_sidebar('footer-widget-area')) : ?>
         <div class="pre-footer">

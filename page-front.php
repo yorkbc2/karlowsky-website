@@ -27,7 +27,7 @@
 				<div></div>
 				<div class="nav-menu">
 					<ul class="nav-lang-menu">
-                        <?php pll_the_languages(['hide_empty' => 0, 'display_names_as' => 'slug']); ?>
+                        <?php pll_the_languages(['hide_empty' => 0, 'display_names_as' => 'name']); ?>
                     </ul>
 				</div>
 			</div>

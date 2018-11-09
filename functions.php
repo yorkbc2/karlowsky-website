@@ -26,3 +26,4 @@ require_once locate_template('/inc/feedback.php');
 require_once locate_template('/inc/shortcodes.php');
 require_once locate_template('/inc/meta-boxes.php');
 require_once locate_template('/inc/custom-post-artwork.php');
+require_once locate_template('/inc/localize.php');
